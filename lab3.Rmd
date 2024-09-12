@@ -1,0 +1,158 @@
+---
+title: "Lab 3: Displaying Data Visualization on a Website"
+author: "Britney Pepper"
+output: html_document
+date: "2024-09-12"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+library(rmarkdown)
+library(dplyr)
+library(tidyverse)
+```
+
+</br>
+
+## Introduction
+
+</br>
+
+Installing Packages
+
+```{r install packages}
+# install.packages("palmerpenguins")
+
+library("palmerpenguins")
+
+data(package = 'palmerpenguins')
+```
+
+</br>
+
+Load and view the data set Palmer Penguins
+
+```{r, load and view the data}
+data_raw <- palmerpenguins::penguins_raw
+print(data_raw)
+
+data <- palmerpenguins::penguins
+print(data)
+```
+
+</br>
+
+## Exercise
+
+</br>
+
+#### Data
+Loading the data
+```{r, loading the data}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+library(rmarkdown)
+library(dplyr)
+library(tidyverse)
+library(palmerpenguins)
+```
+
+</br>
+
+#### Single trait distribution
+Explore the distribution in any one of the morphological traits in the penguin dataset.
+
+```{r, single trait distribution, warning=FALSE, echo=FALSE}
+#Density of each bill length of all the data
+ggplot(data, aes(x = bill_length_mm)) +
+  geom_density()
+
+#Density of each bill length by species
+ggplot(data) +
+  geom_density(aes(x = bill_length_mm, fill = species))
+
+#Density of each bill length by species to show overlap
+ggplot(data) +
+  geom_density(aes(x = bill_length_mm, fill = species), alpha = 0.4)
+```
+
+We can see by the overlap that the Gentoo and Chinstrap have similar bill length while the Adelie has a small bill length overall.
+
+</br>
+</br>
+
+#### Relationship between multiple traits
+Explore the relationship between multiple different morphological traits between species in the dataset.
+
+```{r, relationships between multiple traits, warning=FALSE, echo=FALSE, message=FALSE}
+#Comparing body mass and bill length
+ggplot(data, aes(x = body_mass_g, y = bill_length_mm)) +
+  geom_point()
+
+#Comparing body mass and bill length colored by species
+ggplot(data, aes(x = body_mass_g, y = bill_length_mm)) +
+  geom_point(aes(color = species))
+
+#Comparing body mass and bill length colored by species with trend lines
+ggplot(data, aes(x = body_mass_g, y = bill_length_mm)) +
+  geom_point(aes(color = species)) +
+  geom_smooth(aes(color = species))
+
+#Comparing body mass and bill length colored by species with linear trend lines
+ggplot(data, aes(x = body_mass_g, y = bill_length_mm)) +
+  geom_point(aes(color = species)) +
+  geom_smooth(aes(color = species), method = "lm")
+
+#Comparing body mass and flipper length
+ggplot(data, aes(x = body_mass_g, y = flipper_length_mm)) +
+  geom_point()
+
+#Comparing body mass and flipper length colored by species
+ggplot(data, aes(x = body_mass_g, y = flipper_length_mm)) +
+  geom_point(aes(color = species))
+
+#Comparing body mass and flipper length colored by species with trend lines
+ggplot(data, aes(x = body_mass_g, y = flipper_length_mm)) +
+  geom_point(aes(color = species)) +
+  geom_smooth(aes(color = species))
+
+#Comparing body mass and flipper length colored by species with linear trend lines
+ggplot(data, aes(x = body_mass_g, y = flipper_length_mm)) +
+  geom_point(aes(color = species)) +
+  geom_smooth(aes(color = species), method = "lm")
+```
+
+</br>
+
+#### Sexual dimorphism
+Explore the level of sexual dimorphism in different morphological traits in penguins.
+
+```{r, sexual dimorphism, echo=FALSE, message=FALSE, warning=FALSE}
+#Sexual dimorphism for body mass based on sex
+ggplot(data, aes(x = sex, y = body_mass_g)) +
+  geom_point()
+  
+#Sexual dimorphism for body mass and bill length based on sex
+ggplot(data) +
+  geom_point(aes(x = body_mass_g, y = bill_length_mm, color = sex))
+
+#Sexual dimorphism for body mass and bill length based on sex with trend lines
+ggplot(data, aes(x = body_mass_g, y = bill_length_mm)) +
+  geom_point(aes(color = sex)) +
+  geom_smooth(aes(color = sex))
+
+#Sexual dimorphism for body mass and bill length based on sex with trend lines
+ggplot(data, aes(x = body_mass_g, y = bill_length_mm)) +
+  geom_point(aes(color = sex)) +
+  geom_smooth(aes(color = sex), method = "lm")
+
+#Comparing by species
+ggplot(data, aes(x = bill_length_mm, y=bill_depth_mm, color=sex)) + 
+  geom_point() +
+  facet_wrap(~species)
+```
+
+</br>
+
+

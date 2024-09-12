@@ -1,0 +1,9 @@
+name: "NTRES6100_Lab3"
+navbar:
+  title: "Britney Pepper's Test Website"
+  left:
+    - text: "Website Introduction"
+      href: website.html
+    - text: "Lab 3"
+      href: lab3.html
+output_dir: "."

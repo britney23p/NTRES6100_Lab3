@@ -6,4 +6,9 @@ navbar:
       href: website.html
     - text: "Lab 3"
       href: lab3.html
-output_dir: "."
+output:
+  html_document:
+    theme: cerulean
+    highlight: textmate
+    toc: true 
+    toc_float: true 
